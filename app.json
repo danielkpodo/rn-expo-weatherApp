@@ -36,6 +36,22 @@
         {
           "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "node_modules/@expo-google-fonts/Inter_100Thin",
+            "node_modules/@expo-google-fonts/Inter_200ExtraLight",
+            "node_modules/@expo-google-fonts/Inter_300Light",
+            "node_modules/@expo-google-fonts/Inter_400Regular",
+            "node_modules/@expo-google-fonts/Inter_500Medium",
+            "node_modules/@expo-google-fonts/Inter_600SemiBold",
+            "node_modules/@expo-google-fonts/Inter_700Bold",
+            "node_modules/@expo-google-fonts/Inter_800ExtraBold",
+            "node_modules/@expo-google-fonts/Inter_900Black"
+          ]
+        }
       ]
     ],
     "experiments": {

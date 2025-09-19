@@ -1,8 +1,9 @@
 import Page from '@/components/Page';
+import Text from '@/components/Text';
 import useLocation from '@/hooks/useLocation';
 import useWeatherForecast from '@/hooks/useWeatherForecast';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 const HomeScreen = () => {
   const { coordinates, loading: locationLoading } = useLocation();
@@ -24,7 +25,11 @@ const HomeScreen = () => {
   return (
     <Page>
       <View>
-        <Text>Home kdkdk</Text>
+        <Text>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim tempora
+          itaque repudiandae quia obcaecati voluptas harum nisi cum quasi?
+          Possimus reiciendis in facilis doloribus esse qui eaque ab nisi a.
+        </Text>
       </View>
     </Page>
   );
