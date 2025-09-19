@@ -28,9 +28,14 @@ const ForeCastRow = ({ date, max, min, code }: ForeCastRowProps) => {
       <View style={styles.iconDescription}>
         <Image
           source={{ uri: weatherDescription?.image }}
-          style={{ width: 40, height: 40 }}
+          style={{ width: 32, height: 32, resizeMode: 'contain' }}
         />
-        <Text color={colors.secondary}>
+        <Text
+          color={colors.secondary}
+          ellipsizeMode='tail'
+          numberOfLines={1}
+          style={{ flexWrap: 'nowrap' }}
+        >
           {weatherDescription?.description || '--'}
         </Text>
       </View>
@@ -41,25 +46,26 @@ const ForeCastRow = ({ date, max, min, code }: ForeCastRowProps) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: 8,
   },
   day: {
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   temperatures: {
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row',
     gap: 8,
   },
   iconDescription: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 8,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    gap: 6,
   },
 });
 
