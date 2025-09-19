@@ -2,6 +2,13 @@
 
 A beautiful and modern weather application built with React Native and Expo, featuring real-time weather data and elegant UI design.
 
+## 📸 Screenshots
+
+<div align="center">
+  <img src="shot1.png" alt="Weather App Home Screen" width="300" style="margin: 10px;" />
+  <img src="shot2.png" alt="Weather App Forecast" width="300" style="margin: 10px;" />
+</div>
+
 ## ✨ Features
 
 - 🌍 **Real-time Weather Data** - Get current weather conditions using Open-Meteo API

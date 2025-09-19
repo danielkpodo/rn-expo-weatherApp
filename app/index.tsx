@@ -27,7 +27,7 @@ const HomeScreen = () => {
 
   return (
     <>
-      <ActivityIndicator visible={isPending || isRefetching} />
+      <ActivityIndicator visible={isPending} />
       <Page>
         <View style={styles.container}>
           <View style={styles.PageHeader}>
@@ -52,6 +52,8 @@ const HomeScreen = () => {
               data={data?.normalizedForecast}
               renderItem={({ item }) => <ForeCastRow {...item} />}
               showsVerticalScrollIndicator={false}
+              refreshing={isRefetching}
+              onRefresh={() => refetch()}
               keyExtractor={(item) => item.date.toString()}
             />
           </View>
