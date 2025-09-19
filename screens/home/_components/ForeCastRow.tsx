@@ -17,8 +17,8 @@ const ForeCastRow = ({ date, max, min, code }: ForeCastRowProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.day}>
-        <Text color={colors.secondary} style={{ textTransform: 'capitalize' }}>
-          {moment(date).format('ddd') || '--'}
+        <Text color={colors.secondary}>
+          {moment(date).format('ddd').toUpperCase() || '--'}
         </Text>
       </View>
       <View style={styles.temperatures}>
@@ -50,10 +50,10 @@ const ForeCastRow = ({ date, max, min, code }: ForeCastRowProps) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    gap: 16,
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: 8,
-    gap: 16,
+    padding: 6,
   },
   day: {
     flexDirection: 'row',
@@ -80,11 +80,12 @@ const styles = StyleSheet.create({
     fontVariant: ['tabular-nums'],
   },
   iconDescription: {
+    flex: 2,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
     gap: 8,
-    flex: 2,
+    paddingHorizontal: 12,
   },
 });
 
