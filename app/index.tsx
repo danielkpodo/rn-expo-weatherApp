@@ -45,7 +45,7 @@ const HomeScreen = () => {
             />
           </View>
           <View style={styles.forecastContainer}>
-            <Text size='md' weight='600' style={styles.forecastTitle}>
+            <Text size='lg' weight='600' style={styles.forecastTitle}>
               This Week
             </Text>
             <FlatList

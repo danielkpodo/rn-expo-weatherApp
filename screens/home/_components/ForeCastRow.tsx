@@ -22,8 +22,12 @@ const ForeCastRow = ({ date, max, min, code }: ForeCastRowProps) => {
         </Text>
       </View>
       <View style={styles.temperatures}>
-        <Text weight='600'>{max.toFixed(1) || '--'}°</Text>
-        <Text color={colors.secondary}>{min.toFixed(1) || '--'}°</Text>
+        <Text weight='600' style={styles.maxTemp}>
+          {max.toFixed(1) || '--'}°
+        </Text>
+        <Text color={colors.secondary} style={styles.minTemp}>
+          {min.toFixed(1) || '--'}°
+        </Text>
       </View>
       <View style={styles.iconDescription}>
         <Image
@@ -34,7 +38,7 @@ const ForeCastRow = ({ date, max, min, code }: ForeCastRowProps) => {
           color={colors.secondary}
           ellipsizeMode='tail'
           numberOfLines={1}
-          style={{ flexWrap: 'nowrap' }}
+          style={{ flexShrink: 1, textAlign: 'right' }}
         >
           {weatherDescription?.description || '--'}
         </Text>
@@ -48,24 +52,39 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 8,
+    marginVertical: 8,
+    gap: 16,
   },
   day: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    flex: 1,
   },
+
   temperatures: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     gap: 8,
+    flex: 1,
+  },
+  maxTemp: {
+    minWidth: 46,
+    textAlign: 'right',
+    fontVariant: ['tabular-nums'],
+  },
+  minTemp: {
+    minWidth: 46,
+    textAlign: 'left',
+    fontVariant: ['tabular-nums'],
   },
   iconDescription: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    gap: 6,
+    alignItems: 'center',
+    gap: 8,
+    flex: 2,
   },
 });
 
