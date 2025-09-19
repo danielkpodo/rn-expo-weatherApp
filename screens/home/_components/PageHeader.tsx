@@ -1,18 +1,25 @@
 import Text from '@/components/Text';
 import colors from '@/constants/colors';
 import { TextAlignEnd } from 'lucide-react-native';
+import moment from 'moment';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-const PageHeader = () => {
+interface PageHeaderProps {
+  location: string;
+}
+
+const PageHeader = ({ location }: PageHeaderProps) => {
   return (
     <View style={styles.container}>
       <View>
-        <Text size='xl' weight='600' style={styles.locationHeader}>
-          Calicut, Kerala
+        <Text size='lg' weight='600' style={styles.locationHeader}>
+          {location.length > 20
+            ? location.substring(0, 21) + '...'
+            : location || 'Unknown Location'}
         </Text>
         <Text size='md' color={colors.secondary}>
-          Sunday, 1 AM
+          {moment().format('dddd, h A')}
         </Text>
       </View>
       <View style={styles.icon}>
@@ -32,6 +39,8 @@ const styles = StyleSheet.create({
   },
   locationHeader: {
     color: '#111827',
+    marginRight: 10,
+    flexWrap: 'wrap',
   },
   icon: {
     marginTop: 5,

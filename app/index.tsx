@@ -10,12 +10,14 @@ import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 
 const HomeScreen = () => {
-  const { coordinates, loading: locationLoading } = useLocation();
+  const { coordinates, loading: locationLoading, address } = useLocation();
 
   const { data, isPending, error } = useWeatherForecast({
     latitude: coordinates?.latitude ?? 5.362229,
     longitude: coordinates?.longitude ?? -0.629892,
   });
+
+  const today = data?.normalizedForecast?.[0];
 
   if (isPending) {
     return <Text>Loading weather data...</Text>;
@@ -29,19 +31,23 @@ const HomeScreen = () => {
     <Page>
       <View style={styles.container}>
         <View style={styles.PageHeader}>
-          <PageHeader />
+          <PageHeader location={`${address?.city}, ${address?.country}`} />
         </View>
         <View style={styles.CurrentWeather}>
-          <CurrentWeather />
+          <CurrentWeather
+            min={today?.min}
+            max={today?.max}
+            code={today?.code as number}
+          />
         </View>
         <View style={styles.forecastContainer}>
-          <Text size='md' weight='600'>
+          <Text size='md' weight='600' style={styles.forecastTitle}>
             This Week
           </Text>
-          <ForeCastRow />
           <FlatList
             data={data?.normalizedForecast}
-            renderItem={({ item }) => <ForeCastRow {...item} key={item.code} />}
+            renderItem={({ item }) => <ForeCastRow {...item} />}
+            keyExtractor={(item) => item.date.toString()}
           />
         </View>
       </View>
@@ -67,10 +73,11 @@ const styles = StyleSheet.create({
   forecastContainer: {
     flex: 4,
     backgroundColor: colors.forecastBackground,
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     borderRadius: 12,
   },
   forecastTitle: {
-    marginVertical: 0,
+    marginVertical: 12,
   },
 });

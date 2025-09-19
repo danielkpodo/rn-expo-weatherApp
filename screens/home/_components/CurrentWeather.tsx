@@ -4,13 +4,20 @@ import { weatherCodeMap } from '@/utils';
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
-const CurrentWeather = () => {
-  const currentWeather = weatherCodeMap[2];
+interface CurrentWeatherProps {
+  min: number | undefined;
+  max: number | undefined;
+  code: number;
+}
+
+const CurrentWeather = ({ code, max, min }: CurrentWeatherProps) => {
+  const currentWeather = weatherCodeMap?.[code];
+  const averageTemp = max && min ? ((max + min) / 2).toFixed(1) : '--';
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: currentWeather.image }} />
       <Text weight='800' style={styles.temperature}>
-        28°
+        {averageTemp}°
       </Text>
       <Text size='lg' weight='500' color={colors.secondary}>
         {currentWeather.description}

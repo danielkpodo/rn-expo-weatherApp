@@ -1,24 +1,38 @@
 import Text from '@/components/Text';
 import colors from '@/constants/colors';
+import { weatherCodeMap } from '@/utils';
+import moment from 'moment';
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
-const ForeCastRow = () => {
+interface ForeCastRowProps {
+  date: string;
+  max: number;
+  min: number;
+  code: number;
+}
+
+const ForeCastRow = ({ date, max, min, code }: ForeCastRowProps) => {
+  const weatherDescription = weatherCodeMap[code];
   return (
     <View style={styles.container}>
       <View style={styles.day}>
-        <Text color={colors.secondary}>WED</Text>
+        <Text color={colors.secondary} style={{ textTransform: 'capitalize' }}>
+          {moment(date).format('ddd') || '--'}
+        </Text>
       </View>
       <View style={styles.temperatures}>
-        <Text weight='600'>23°</Text>
-        <Text color={colors.secondary}>18°</Text>
+        <Text weight='600'>{max.toFixed(1) || '--'}°</Text>
+        <Text color={colors.secondary}>{min.toFixed(1) || '--'}°</Text>
       </View>
       <View style={styles.iconDescription}>
         <Image
-          source={{ uri: 'http://openweathermap.org/img/wn/01d@2x.png' }}
+          source={{ uri: weatherDescription?.image }}
           style={{ width: 40, height: 40 }}
         />
-        <Text color={colors.secondary}>Rainy</Text>
+        <Text color={colors.secondary}>
+          {weatherDescription?.description || '--'}
+        </Text>
       </View>
     </View>
   );
@@ -29,7 +43,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 6,
+    marginBottom: 8,
   },
   day: {
     justifyContent: 'center',
@@ -39,7 +53,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    gap: 10,
+    gap: 8,
   },
   iconDescription: {
     flexDirection: 'row',

@@ -6,6 +6,9 @@ import { Alert } from 'react-native';
 const useLocation = () => {
   const [coordinates, setCoordinates] = useState<Coordinates>();
   const [loading, setLoading] = useState(false);
+  const [address, setAddress] = React.useState<
+    Location.LocationGeocodedAddress | undefined
+  >(undefined);
 
   const getLocation = async () => {
     setLoading(true);
@@ -22,6 +25,15 @@ const useLocation = () => {
         } = position;
 
         setCoordinates({ latitude, longitude });
+
+        // Get complete address using reverse geocoding
+        const [geocodedAddress] = await Location.reverseGeocodeAsync({
+          latitude,
+          longitude,
+        });
+        if (geocodedAddress) {
+          setAddress(geocodedAddress);
+        }
       }
     } catch (error) {
       console.error('Error getting location:', error);
@@ -34,7 +46,7 @@ const useLocation = () => {
     void getLocation();
   }, []);
 
-  return { coordinates, loading };
+  return { coordinates, loading, address };
 };
 
 export default useLocation;

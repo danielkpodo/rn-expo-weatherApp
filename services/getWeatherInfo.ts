@@ -8,7 +8,7 @@ export interface Coordinates {
 
 const DAILY_FORECAST = 'temperature_2m_max,temperature_2m_min,weathercode';
 const TIMEZONE = 'auto';
-const FORECAST_DAYS = 6; // index 0 is today, so 6 gives a total of 7 days
+const FORECAST_DAYS = 7;
 
 export const getWeatherInfo = async (params: Coordinates) => {
   try {
