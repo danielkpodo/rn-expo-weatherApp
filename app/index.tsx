@@ -34,6 +34,7 @@ const HomeScreen = () => {
             <PageHeader
               location={`${address?.city}, ${address?.country}`}
               isLoading={locationLoading}
+              onRefresh={() => refetch()}
             />
           </View>
           <View style={styles.CurrentWeather}>

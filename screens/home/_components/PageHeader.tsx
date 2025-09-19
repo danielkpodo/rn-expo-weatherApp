@@ -3,14 +3,15 @@ import colors from '@/constants/colors';
 import { TextAlignEnd } from 'lucide-react-native';
 import moment from 'moment';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 interface PageHeaderProps {
   location: string;
   isLoading: boolean;
+  onRefresh?: () => void;
 }
 
-const PageHeader = ({ location, isLoading }: PageHeaderProps) => {
+const PageHeader = ({ location, onRefresh, isLoading }: PageHeaderProps) => {
   return (
     <View style={styles.container}>
       <View>
@@ -26,7 +27,9 @@ const PageHeader = ({ location, isLoading }: PageHeaderProps) => {
         </Text>
       </View>
       <View style={styles.icon}>
-        <TextAlignEnd color={colors.secondary} />
+        <TouchableOpacity onPress={onRefresh} disabled={isLoading}>
+          <TextAlignEnd color={colors.secondary} />
+        </TouchableOpacity>
       </View>
     </View>
   );
