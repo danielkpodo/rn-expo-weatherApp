@@ -1,4 +1,5 @@
 import ActivityIndicator from '@/components/ActivityIndicator';
+import Error from '@/components/Error';
 import Page from '@/components/Page';
 import Text from '@/components/Text';
 import colors from '@/constants/colors';
@@ -13,7 +14,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 const HomeScreen = () => {
   const { coordinates, loading: locationLoading, address } = useLocation();
 
-  const { data, isPending, error } = useWeatherForecast({
+  const { data, isPending, error, refetch, isRefetching } = useWeatherForecast({
     latitude: coordinates?.latitude ?? 5.362229,
     longitude: coordinates?.longitude ?? -0.629892,
   });
@@ -21,12 +22,12 @@ const HomeScreen = () => {
   const today = data?.normalizedForecast?.[0];
 
   if (error) {
-    return <Text>Something went wrong: {error.message}</Text>;
+    return <Error message={error.message} onRetry={() => refetch()} />;
   }
 
   return (
     <>
-      <ActivityIndicator visible={isPending} />
+      <ActivityIndicator visible={isPending || isRefetching} />
       <Page>
         <View style={styles.container}>
           <View style={styles.PageHeader}>
