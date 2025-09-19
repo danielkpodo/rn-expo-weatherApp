@@ -1,30 +1,119 @@
-export const weatherCodeMap: Record<number, { label: string; icon: string }> = {
-  0: { label: 'Clear sky', icon: '☀️' },
-  1: { label: 'Mainly clear', icon: '🌤️' },
-  2: { label: 'Partly cloudy', icon: '⛅' },
-  3: { label: 'Overcast', icon: '☁️' },
-  45: { label: 'Fog', icon: '🌫️' },
-  48: { label: 'Depositing rime fog', icon: '🌫️' },
-  51: { label: 'Light drizzle', icon: '🌦️' },
-  53: { label: 'Moderate drizzle', icon: '🌦️' },
-  55: { label: 'Dense drizzle', icon: '🌧️' },
-  56: { label: 'Light freezing drizzle', icon: '🌧️' },
-  57: { label: 'Dense freezing drizzle', icon: '🌧️' },
-  61: { label: 'Slight rain', icon: '🌦️' },
-  63: { label: 'Moderate rain', icon: '🌧️' },
-  65: { label: 'Heavy rain', icon: '🌧️' },
-  66: { label: 'Light freezing rain', icon: '🌧️' },
-  67: { label: 'Heavy freezing rain', icon: '🌧️' },
-  71: { label: 'Slight snow fall', icon: '🌨️' },
-  73: { label: 'Moderate snow fall', icon: '❄️' },
-  75: { label: 'Heavy snow fall', icon: '❄️' },
-  77: { label: 'Snow grains', icon: '🌨️' },
-  80: { label: 'Slight rain showers', icon: '🌦️' },
-  81: { label: 'Moderate rain showers', icon: '🌧️' },
-  82: { label: 'Violent rain showers', icon: '🌧️' },
-  85: { label: 'Slight snow showers', icon: '🌨️' },
-  86: { label: 'Heavy snow showers', icon: '❄️' },
-  95: { label: 'Thunderstorm', icon: '⛈️' },
-  96: { label: 'Thunderstorm with slight hail', icon: '⛈️' },
-  99: { label: 'Thunderstorm with heavy hail', icon: '⛈️' },
+export interface WeatherIcon {
+  description: string;
+  image: string;
+}
+
+export const weatherCodeMap: Record<number, WeatherIcon> = {
+  0: {
+    description: 'Sunny',
+    image: 'http://openweathermap.org/img/wn/01d@2x.png',
+  },
+  1: {
+    description: 'Mainly Sunny',
+    image: 'http://openweathermap.org/img/wn/01d@2x.png',
+  },
+  2: {
+    description: 'Partly Cloudy',
+    image: 'http://openweathermap.org/img/wn/02d@2x.png',
+  },
+  3: {
+    description: 'Cloudy',
+    image: 'http://openweathermap.org/img/wn/03d@2x.png',
+  },
+  45: {
+    description: 'Foggy',
+    image: 'http://openweathermap.org/img/wn/50d@2x.png',
+  },
+  48: {
+    description: 'Rime Fog',
+    image: 'http://openweathermap.org/img/wn/50d@2x.png',
+  },
+  51: {
+    description: 'Light Drizzle',
+    image: 'http://openweathermap.org/img/wn/09d@2x.png',
+  },
+  53: {
+    description: 'Drizzle',
+    image: 'http://openweathermap.org/img/wn/09d@2x.png',
+  },
+  55: {
+    description: 'Heavy Drizzle',
+    image: 'http://openweathermap.org/img/wn/09d@2x.png',
+  },
+  56: {
+    description: 'Light Freezing Drizzle',
+    image: 'http://openweathermap.org/img/wn/09d@2x.png',
+  },
+  57: {
+    description: 'Freezing Drizzle',
+    image: 'http://openweathermap.org/img/wn/09d@2x.png',
+  },
+  61: {
+    description: 'Light Rain',
+    image: 'http://openweathermap.org/img/wn/10d@2x.png',
+  },
+  63: {
+    description: 'Rain',
+    image: 'http://openweathermap.org/img/wn/10d@2x.png',
+  },
+  65: {
+    description: 'Heavy Rain',
+    image: 'http://openweathermap.org/img/wn/10d@2x.png',
+  },
+  66: {
+    description: 'Light Freezing Rain',
+    image: 'http://openweathermap.org/img/wn/10d@2x.png',
+  },
+  67: {
+    description: 'Freezing Rain',
+    image: 'http://openweathermap.org/img/wn/10d@2x.png',
+  },
+  71: {
+    description: 'Light Snow',
+    image: 'http://openweathermap.org/img/wn/13d@2x.png',
+  },
+  73: {
+    description: 'Snow',
+    image: 'http://openweathermap.org/img/wn/13d@2x.png',
+  },
+  75: {
+    description: 'Heavy Snow',
+    image: 'http://openweathermap.org/img/wn/13d@2x.png',
+  },
+  77: {
+    description: 'Snow Grains',
+    image: 'http://openweathermap.org/img/wn/13d@2x.png',
+  },
+  80: {
+    description: 'Light Showers',
+    image: 'http://openweathermap.org/img/wn/09d@2x.png',
+  },
+  81: {
+    description: 'Showers',
+    image: 'http://openweathermap.org/img/wn/09d@2x.png',
+  },
+  82: {
+    description: 'Heavy Showers',
+    image: 'http://openweathermap.org/img/wn/09d@2x.png',
+  },
+  85: {
+    description: 'Light Snow Showers',
+    image: 'http://openweathermap.org/img/wn/13d@2x.png',
+  },
+  86: {
+    description: 'Snow Showers',
+    image: 'http://openweathermap.org/img/wn/13d@2x.png',
+  },
+  95: {
+    description: 'Thunderstorm',
+    image: 'http://openweathermap.org/img/wn/11d@2x.png',
+  },
+  96: {
+    description: 'Light Thunderstorms With Hail',
+    image: 'http://openweathermap.org/img/wn/11d@2x.png',
+  },
+  99: {
+    description: 'Thunderstorm With Hail',
+    image: 'http://openweathermap.org/img/wn/11d@2x.png',
+  },
 };

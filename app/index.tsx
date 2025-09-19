@@ -1,9 +1,13 @@
 import Page from '@/components/Page';
 import Text from '@/components/Text';
+import colors from '@/constants/colors';
 import useLocation from '@/hooks/useLocation';
 import useWeatherForecast from '@/hooks/useWeatherForecast';
+import CurrentWeather from '@/screens/home/_components/CurrentWeather';
+import ForeCastRow from '@/screens/home/_components/ForeCastRow';
+import PageHeader from '@/screens/home/_components/PageHeader';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 
 const HomeScreen = () => {
   const { coordinates, loading: locationLoading } = useLocation();
@@ -21,15 +25,25 @@ const HomeScreen = () => {
     return <Text>Something went wrong: {error.message}</Text>;
   }
 
-  console.log('weather data', data.normalizedForecast?.length);
   return (
     <Page>
-      <View>
-        <Text>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim tempora
-          itaque repudiandae quia obcaecati voluptas harum nisi cum quasi?
-          Possimus reiciendis in facilis doloribus esse qui eaque ab nisi a.
-        </Text>
+      <View style={styles.container}>
+        <View style={styles.PageHeader}>
+          <PageHeader />
+        </View>
+        <View style={styles.CurrentWeather}>
+          <CurrentWeather />
+        </View>
+        <View style={styles.forecastContainer}>
+          <Text size='md' weight='600'>
+            This Week
+          </Text>
+          <ForeCastRow />
+          <FlatList
+            data={data?.normalizedForecast}
+            renderItem={({ item }) => <ForeCastRow {...item} key={item.code} />}
+          />
+        </View>
       </View>
     </Page>
   );
@@ -37,4 +51,26 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  PageHeader: {
+    flex: 1,
+  },
+  CurrentWeather: {
+    flex: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  forecastContainer: {
+    flex: 4,
+    backgroundColor: colors.forecastBackground,
+    padding: 16,
+    borderRadius: 12,
+  },
+  forecastTitle: {
+    marginVertical: 0,
+  },
+});

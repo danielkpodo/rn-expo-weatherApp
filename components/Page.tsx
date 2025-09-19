@@ -14,7 +14,7 @@ const Page = ({ children, rootStyle }: PageProps) => {
   return (
     <SafeAreaView
       style={[styles.root, rootStyle]}
-      edges={['top', 'left', 'right']}
+      edges={['top', 'left', 'right', 'bottom']}
     >
       {children}
     </SafeAreaView>
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: '#fff',
+    padding: 16,
   },
 });
 
