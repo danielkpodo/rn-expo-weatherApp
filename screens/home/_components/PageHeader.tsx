@@ -7,14 +7,17 @@ import { StyleSheet, View } from 'react-native';
 
 interface PageHeaderProps {
   location: string;
+  isLoading: boolean;
 }
 
-const PageHeader = ({ location }: PageHeaderProps) => {
+const PageHeader = ({ location, isLoading }: PageHeaderProps) => {
   return (
     <View style={styles.container}>
       <View>
         <Text size='lg' weight='600' style={styles.locationHeader}>
-          {location.length > 20
+          {isLoading
+            ? 'Detecting location...'
+            : location.length > 20
             ? location.substring(0, 21) + '...'
             : location || 'Unknown Location'}
         </Text>

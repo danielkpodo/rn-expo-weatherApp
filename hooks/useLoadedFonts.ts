@@ -16,11 +16,6 @@ import {
 
 SplashScreen.preventAutoHideAsync();
 
-SplashScreen.setOptions({
-  fade: true,
-  duration: 1000,
-});
-
 const useLoadedFonts = () => {
   const [loaded, error] = useFonts({
     Inter_100Thin,

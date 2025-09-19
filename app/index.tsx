@@ -1,3 +1,4 @@
+import ActivityIndicator from '@/components/ActivityIndicator';
 import Page from '@/components/Page';
 import Text from '@/components/Text';
 import colors from '@/constants/colors';
@@ -19,39 +20,42 @@ const HomeScreen = () => {
 
   const today = data?.normalizedForecast?.[0];
 
-  if (isPending) {
-    return <Text>Loading weather data...</Text>;
-  }
-
   if (error) {
     return <Text>Something went wrong: {error.message}</Text>;
   }
 
   return (
-    <Page>
-      <View style={styles.container}>
-        <View style={styles.PageHeader}>
-          <PageHeader location={`${address?.city}, ${address?.country}`} />
+    <>
+      <ActivityIndicator visible={isPending} />
+      <Page>
+        <View style={styles.container}>
+          <View style={styles.PageHeader}>
+            <PageHeader
+              location={`${address?.city}, ${address?.country}`}
+              isLoading={locationLoading}
+            />
+          </View>
+          <View style={styles.CurrentWeather}>
+            <CurrentWeather
+              min={today?.min}
+              max={today?.max}
+              code={today?.code as number}
+            />
+          </View>
+          <View style={styles.forecastContainer}>
+            <Text size='md' weight='600' style={styles.forecastTitle}>
+              This Week
+            </Text>
+            <FlatList
+              data={data?.normalizedForecast}
+              renderItem={({ item }) => <ForeCastRow {...item} />}
+              showsVerticalScrollIndicator={false}
+              keyExtractor={(item) => item.date.toString()}
+            />
+          </View>
         </View>
-        <View style={styles.CurrentWeather}>
-          <CurrentWeather
-            min={today?.min}
-            max={today?.max}
-            code={today?.code as number}
-          />
-        </View>
-        <View style={styles.forecastContainer}>
-          <Text size='md' weight='600' style={styles.forecastTitle}>
-            This Week
-          </Text>
-          <FlatList
-            data={data?.normalizedForecast}
-            renderItem={({ item }) => <ForeCastRow {...item} />}
-            keyExtractor={(item) => item.date.toString()}
-          />
-        </View>
-      </View>
-    </Page>
+      </Page>
+    </>
   );
 };
 
@@ -68,14 +72,14 @@ const styles = StyleSheet.create({
     flex: 3,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 16,
+    marginVertical: 16,
   },
   forecastContainer: {
-    flex: 4,
+    flex: 5,
     backgroundColor: colors.forecastBackground,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    padding: 16,
     borderRadius: 12,
+    marginTop: 24,
   },
   forecastTitle: {
     marginVertical: 12,

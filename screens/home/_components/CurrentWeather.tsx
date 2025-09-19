@@ -15,12 +15,12 @@ const CurrentWeather = ({ code, max, min }: CurrentWeatherProps) => {
   const averageTemp = max && min ? ((max + min) / 2).toFixed(1) : '--';
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: currentWeather.image }} />
+      <Image style={styles.image} source={{ uri: currentWeather?.image }} />
       <Text weight='800' style={styles.temperature}>
         {averageTemp}°
       </Text>
       <Text size='lg' weight='500' color={colors.secondary}>
-        {currentWeather.description}
+        {currentWeather?.description}
       </Text>
     </View>
   );
